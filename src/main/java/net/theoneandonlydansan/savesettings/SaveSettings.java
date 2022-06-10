@@ -3,6 +3,8 @@ package net.theoneandonlydansan.savesettings;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -35,6 +37,7 @@ public class SaveSettings implements ModInitializer {
 			dispatcher.register(
 				ClientCommandManager.literal("savesettings").executes(context -> {
 					writeToFile();
+					MinecraftClient.getInstance().player.sendMessage(Text.literal("settings saved"), true);
 					return 1;
 				})
 			);
