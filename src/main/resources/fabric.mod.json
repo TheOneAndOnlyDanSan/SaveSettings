@@ -14,16 +14,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.theoneandonlydansan.savesettings.SomehowEverything"
+      "net.theoneandonlydansan.savesettings.SaveSettings"
     ]
   },
   "mixins": [
-    "mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.11.3",
-    "minecraft": "1.18.x",
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "1.19.x",
     "java": ">=17"
   }
 }
