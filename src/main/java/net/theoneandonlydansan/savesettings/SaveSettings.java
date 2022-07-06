@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
-import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.nio.file.Files;
 
@@ -26,6 +25,7 @@ public class SaveSettings implements ModInitializer {
 				optionsSave.createNewFile();
 				saveSettings();
 			}
+			LoadSettings();
 			register();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,7 +45,16 @@ public class SaveSettings implements ModInitializer {
 	public static void saveSettings() {
 		try {
 			Files.write(optionsSave.toPath(), Files.readAllLines(options.toPath()));
-			FileUtils.copyDirectory(configFolderDir, saveFolderDir);
+			Files.copy(configFolderDir.toPath(), saveFolderDir.toPath());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void LoadSettings() {
+		try {
+			Files.write(options.toPath(), Files.readAllLines(optionsSave.toPath()));
+			Files.copy(saveFolderDir.toPath(), configFolderDir.toPath());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
